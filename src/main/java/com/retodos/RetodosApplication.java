@@ -11,3 +11,10 @@ public class RetodosApplication {
 	}
 
 }
+
+
+        /*SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        ClassLoaderRepository.deleteAll();
+        UserRepository.deleteAll();
+        OrderRepository.deleteAll();*/

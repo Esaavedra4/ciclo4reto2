@@ -4,8 +4,10 @@ package com.retodos.controller;
 import com.retodos.model.User;
 import com.retodos.service.UserService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author desarrolloextremo
  */
 
+
 @RequestMapping("/api/user")
 @RestController
+@CrossOrigin ("*")
 public class UserController {
     @Autowired
     private UserService servicio;
@@ -32,8 +36,13 @@ public class UserController {
     public List<User> listar()
     {
         return servicio.listAll();
-    
     }
+    
+      @GetMapping("/{id}")
+    public Optional<User> getUser(@PathVariable("id") Integer id) {
+        return servicio.getUser(id);
+    }
+
     
     @GetMapping("/emailexist/{email}")
     public boolean existeEmail (@PathVariable("email") String email)

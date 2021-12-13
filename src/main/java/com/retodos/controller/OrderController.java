@@ -4,8 +4,8 @@
  */
 package com.retodos.controller;
 
-import com.retodos.model.Product;
-import com.retodos.service.ProductService;
+import com.retodos.model.Order;
+import com.retodos.service.OrderService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,38 +26,43 @@ import org.springframework.web.bind.annotation.RestController;
  * @author blink
  */
 @RestController
-@RequestMapping("/api/clothe")
+@RequestMapping("/api/order")
 @CrossOrigin ("*")
-public class ProductController {
-
-    @Autowired
-    private ProductService productService;
+public class OrderController {
+    
+        @Autowired
+    private OrderService orderService;
 
     @GetMapping("/all")
-    public List<Product> getAll() {
-        return productService.getAll();
+    public List<Order> getAll() {
+        return orderService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Product> getProduct(@PathVariable String id) {
-        return productService.getProduct(id);
+    public Optional<Order> getOrder(@PathVariable Integer id) {
+        return orderService.getOrder(id);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product update(@RequestBody Product product) {
-        return productService.update(product);
+    public Order update(@RequestBody Order order) {
+        return orderService.update(order);
     }
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product save(@RequestBody Product product) {
-        return productService.save(product);
+    public Order save(@RequestBody Order order) {
+        return orderService.save(order);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable String id) {
-        return productService.delete(id);
+    public boolean delete(@PathVariable Integer id) {
+        return orderService.delete(id);
+    }
+    
+    @GetMapping("/zona/{zone}")
+    public  List<Order> getOrdersByZone(@PathVariable("zone") String zone){
+        return orderService.getOrderByZone(zone);
     }
 }
